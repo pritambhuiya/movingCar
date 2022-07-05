@@ -3,14 +3,16 @@ body {
   margin: 0 auto;
 }
 
-#car {
-  position: relative;
-  width: 30px;
-  height: 50px;
+.car {
+  position: absolute;
+  /* width: 50px; */
+  /* height: 80px; */
 }
 
 #road {
+  position: relative;
   width: 900px;
-  height: 800px;
-  background-color: aqua;
+  height: 900px;
+  display: flex;
+  background-color: gray;
 }
