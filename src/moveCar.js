@@ -81,6 +81,13 @@ const drawCar = (car, road) => {
   carElement.style.left = position.x;
 };
 
+const drawRoad = (road) => {
+  const roadElement = document.getElementById('road');
+  roadElement.style.width = road.right + 'px';
+  roadElement.style.height = road.bottom + 'px';
+  return roadElement;
+};
+
 const getLaneDirection = (keyCode) => {
   if (keyCode === 'ArrowRight') {
     return 'right';
@@ -91,19 +98,17 @@ const getLaneDirection = (keyCode) => {
   };
 };
 
-const drawRoad = (road) => {
-  const roadElement = document.getElementById('road');
-  roadElement.style.width = road.right + 'px';
-  roadElement.style.height = road.bottom + 'px';
-  return roadElement;
-};
-
 const createOpposingCars = () => {
   const opposingCars = [];
   opposingCars.push(new Car('car-1', { x: 70, y: 0 }, { height: 100, width: 70 }, 5, 'yellow'));
   opposingCars.push(new Car('car-2', { x: 210, y: 0 }, { height: 100, width: 70 }, 9, 'blue'));
   opposingCars.push(new Car('car-3', { x: 350, y: 0 }, { height: 100, width: 70 }, 7, 'green'));
   return opposingCars;
+};
+
+const isGameOver = (road, playerCar, opposingCar) => {
+  return playerCar.isCollided(opposingCar) ||
+    isOutOfRoadBoundary(road, playerCar);
 };
 
 const startGame = (road, playerCar, opposingCars) => {
@@ -113,7 +118,7 @@ const startGame = (road, playerCar, opposingCars) => {
     opposingCars.forEach((opposingCar) => {
       opposingCar.move('down', road);
 
-      if (playerCar.isCollided(opposingCar)) {
+      if (isGameOver(road, playerCar, opposingCar)) {
         clearInterval(intervalId);
       }
     });
@@ -126,6 +131,12 @@ const startGame = (road, playerCar, opposingCars) => {
   }, 30);
 };
 
+const isOutOfRoadBoundary = (road, playerCar) => {
+  const { position: playerCarPosition, size: playerCarSize } = playerCar.getInfo();
+  return road.left >= playerCarPosition.x ||
+    road.right <= playerCarSize.width + playerCarPosition.x;
+};
+
 const main = () => {
   const road = { top: 0, bottom: 900, right: 500, left: 0 };
   const playerCar = new Car('car',
@@ -135,12 +146,12 @@ const main = () => {
     'red');
   const opposingCars = createOpposingCars();
 
+  startGame(road, playerCar, opposingCars);
+
   document.addEventListener('keydown', ({ code }) => {
     const direction = getLaneDirection(code);
     playerCar.move(direction);
   });
-
-  startGame(road, playerCar, opposingCars);
 };
 
 window.onload = main;
