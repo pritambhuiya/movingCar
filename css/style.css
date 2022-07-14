@@ -1,13 +1,27 @@
 body {
   width: 960px;
   margin: 0 auto;
+  background-color: rgb(15, 60, 12);
+  font-size: 20px;
+}
+
+.view {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.score-board {
+  height: 80px;
+  width: 100px;
+  background-color: azure;
+  text-align: center;
 }
 
 .car {
   position: absolute;
 }
 
-#road {
+.road {
   position: relative;
   width: 900px;
   height: 900px;
