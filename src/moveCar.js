@@ -40,13 +40,15 @@ const getLaneDirection = (keyCode) => {
   };
 };
 
+const random = () => Math.floor(Math.random() * 10) + 2;
+
 const createOpposingCars = () => {
   const opposingCars = [];
-  opposingCars.push(new Car('car-1', { x: 5, y: 0 }, { height: 120, width: 70 }, 5, 'yellow'));
-  opposingCars.push(new Car('car-2', { x: 86, y: 0 }, { height: 120, width: 70 }, 9, 'blue'));
-  opposingCars.push(new Car('car-3', { x: 167, y: 0 }, { height: 120, width: 70 }, 5, 'green'));
-  opposingCars.push(new Car('car-4', { x: 249, y: 0 }, { height: 120, width: 70 }, 7, 'magenta'));
-  opposingCars.push(new Car('car-5', { x: 330, y: 0 }, { height: 120, width: 70 }, 9, 'cyan'));
+  opposingCars.push(new Car('car-1', { x: 5, y: 0 }, { height: 120, width: 70 }, random(), 'yellow'));
+  opposingCars.push(new Car('car-2', { x: 86, y: 0 }, { height: 120, width: 70 }, random(), 'blue'));
+  opposingCars.push(new Car('car-3', { x: 167, y: 0 }, { height: 120, width: 70 }, random(), 'green'));
+  opposingCars.push(new Car('car-4', { x: 249, y: 0 }, { height: 120, width: 70 }, random(), 'magenta'));
+  opposingCars.push(new Car('car-5', { x: 330, y: 0 }, { height: 120, width: 70 }, random(), 'cyan'));
   return opposingCars;
 };
 
@@ -75,6 +77,7 @@ const startGame = (road, playerCar, opposingCars) => {
   let score = 0;
 
   const intervalId = setInterval(() => {
+
     opposingCars.forEach((opposingCar) => {
       opposingCar.move('down', road);
       if (isGameOver(road, playerCar, opposingCar)) {
