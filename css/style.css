@@ -5,6 +5,11 @@ body {
   font-size: 20px;
 }
 
+span {
+  width: 80px;
+  border-right: 1px solid whitesmoke;
+}
+
 .view {
   display: flex;
   justify-content: space-evenly;
@@ -19,6 +24,10 @@ body {
 
 .car {
   position: absolute;
+  border-bottom-left-radius: 1.7em;
+  border-bottom-right-radius: 1.7em;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
 }
 
 .road {
@@ -27,4 +36,11 @@ body {
   height: 900px;
   display: flex;
   background-color: gray;
+}
+
+#car {
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-top-left-radius: 1.7em;
+  border-top-right-radius: 1.7em;
 }

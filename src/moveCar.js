@@ -11,10 +11,12 @@ const drawCar = (car, road) => {
   const { id, position, color, size } = car.getInfo();
 
   const carElement = document.getElementById(id) || createCar(id, road);
-  carElement.style.backgroundColor = color;
   carElement.className = 'car';
+
+  carElement.style.backgroundColor = color;
   carElement.style.height = px(size.height);
   carElement.style.width = px(size.width);
+
   carElement.style.top = position.y;
   carElement.style.left = position.x;
 };
@@ -40,22 +42,24 @@ const getLaneDirection = (keyCode) => {
 
 const createOpposingCars = () => {
   const opposingCars = [];
-  opposingCars.push(new Car('car-1', { x: 70, y: 0 }, { height: 100, width: 70 }, 5, 'yellow'));
-  opposingCars.push(new Car('car-2', { x: 210, y: 0 }, { height: 100, width: 70 }, 9, 'blue'));
-  opposingCars.push(new Car('car-3', { x: 350, y: 0 }, { height: 100, width: 70 }, 7, 'green'));
+  opposingCars.push(new Car('car-1', { x: 5, y: 0 }, { height: 120, width: 70 }, 5, 'yellow'));
+  opposingCars.push(new Car('car-2', { x: 86, y: 0 }, { height: 120, width: 70 }, 9, 'blue'));
+  opposingCars.push(new Car('car-3', { x: 167, y: 0 }, { height: 120, width: 70 }, 5, 'green'));
+  opposingCars.push(new Car('car-4', { x: 249, y: 0 }, { height: 120, width: 70 }, 7, 'magenta'));
+  opposingCars.push(new Car('car-5', { x: 330, y: 0 }, { height: 120, width: 70 }, 9, 'cyan'));
   return opposingCars;
 };
 
-const isGameOver = (road, playerCar, opposingCar) => {
-  return playerCar.isCollided(opposingCar) ||
-    road.isOutOfBoundary(playerCar);
-};
+const isGameOver = (road, playerCar, opposingCar) =>
+  playerCar.isCollided(opposingCar) || road.isOutOfBoundary(playerCar);
 
 const createScoreBoard = (id) => {
   const view = document.getElementById('view');
   const scoreBoard = document.createElement('div');
+
   scoreBoard.id = id;
   scoreBoard.className = 'score-board';
+
   view.appendChild(scoreBoard);
   return scoreBoard;
 };
@@ -89,14 +93,14 @@ const startGame = (road, playerCar, opposingCars) => {
 };
 
 const main = () => {
-  const road = new Road(0, 900, 500, 0);
+  const road = new Road(0, 900, 405, 0);
   const playerCar = new Car('car',
-    { x: 210, y: 700 },
-    { height: 100, width: 70 },
-    140,
+    { x: 167, y: 700 },
+    { height: 120, width: 70 },
+    80,
     'red');
-  const opposingCars = createOpposingCars();
 
+  const opposingCars = createOpposingCars();
   startGame(road, playerCar, opposingCars);
 
   document.addEventListener('keydown', ({ code }) => {

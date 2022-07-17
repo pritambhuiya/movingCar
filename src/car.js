@@ -4,6 +4,7 @@ class Car {
   #delta;
   #color;
   #size;
+
   constructor(id, position, size, delta, color) {
     this.#id = id;
     this.#position = position;
@@ -27,9 +28,11 @@ class Car {
     if (direction === 'right') {
       this.#position.x += this.#delta;
     }
+
     if (direction === 'left') {
       this.#position.x -= this.#delta;
     }
+
     if (direction === 'down') {
       this.#moveDown(road);
     }
@@ -38,6 +41,7 @@ class Car {
   getInfo() {
     const { x, y } = this.#position;
     const { height, width } = this.#size;
+
     return {
       id: this.#id,
       position: { x, y },
